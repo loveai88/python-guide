@@ -8,27 +8,26 @@ both you and others a lot of time.
 Project Documentation
 ---------------------
 
-A ``README`` file at the root directory should give general
-information to the users and the maintainers. It should be raw text or
-written in some very easy to read markup, such as
-:ref:`reStructuredText-ref` and Markdown. It should contain a few
-lines explaining the purpose of the project or the library (without
-assuming the user knows anything about the project), the url of the
-main source for the software, and some basic credit information. This
-file is the main entry point for readers of the code.
+A :file:`README` file at the root directory should give general information
+to both users and maintainers of a project. It should be raw text or
+written in some very easy to read markup, such as :ref:`reStructuredText-ref`
+or Markdown. It should contain a few lines explaining the purpose of the
+project or library (without assuming the user knows anything about the
+project), the url of the main source for the software, and some basic credit
+information. This file is the main entry point for readers of the code.
 
-An ``INSTALL`` file is less necessary with python.  The installation
+An :file:`INSTALL` file is less necessary with Python.  The installation
 instructions are often reduced to one command, such as ``pip install
-module`` or ``python setup.py install`` and added to the ``README``
+module`` or ``python setup.py install`` and added to the :file:`README`
 file.
 
-A ``LICENSE`` file should *always* be present and specify the license under which the
-software is made available to the public.
+A :file:`LICENSE` file should *always* be present and specify the license
+under which the software is made available to the public.
 
-A ``TODO`` file or a ``TODO`` section in ``README`` should list the
+A :file:`TODO` file or a ``TODO`` section in :file:`README` should list the
 planned development for the code.
 
-A ``CHANGELOG`` file or section in ``README`` should compile a short
+A :file:`CHANGELOG` file or section in :file:`README` should compile a short
 overview of the changes in the code base for the latest versions.
 
 Project Publication
@@ -41,12 +40,12 @@ of the following components:
   done with the product, using one or two extremely simplified use
   cases. This is the thirty-second pitch for your project.
 
-- A *tutorial* should show some primary use cases in more detail. The reader will
-  follow a step-by-step procedure to set-up a working prototype.
+- A *tutorial* should show some primary use cases in more detail. The reader
+  will follow a step-by-step procedure to set-up a working prototype.
 
 - An *API reference* is typically generated from the code (see
-  :ref:`docstrings <docstring-ref>`). It will list all publicly available interfaces,
-  parameters, and return values.
+  :ref:`docstrings <docstring-ref>`). It will list all publicly available
+  interfaces, parameters, and return values.
 
 - *Developer documentation* is intended for potential contributors. This can
   include code convention and general design strategy of the project.
@@ -56,7 +55,7 @@ of the following components:
 Sphinx
 ~~~~~~
 
-Sphinx_ is far and away the most popular python documentation
+Sphinx_ is far and away the most popular Python documentation
 tool. **Use it.**  It converts :ref:`restructuredtext-ref` markup language
 into a range of output formats including HTML, LaTeX (for printable
 PDF versions), manual pages, and plain text.
@@ -94,19 +93,22 @@ Reference`_ should help you familiarize yourself with its syntax.
 Code Documentation Advice
 -------------------------
 
-Comments clarify the code and they are added with purpose of making the 
-code easier to understand. In Python, comments begin with a hash 
+Comments clarify the code and they are added with purpose of making the
+code easier to understand. In Python, comments begin with a hash
 (number sign) (``#``).
 
 .. _docstring-ref:
 
-In Python, *docstrings* describe modules, classes, and functions: ::
+In Python, *docstrings* describe modules, classes, and functions:
+
+.. code-block:: python
 
     def square_and_rooter(x):
         """Returns the square root of self times self."""
         ...
 
-In general, follow the comment section of :pep:`8#comments` (the "Python Style Guide").
+In general, follow the comment section of :pep:`8#comments` (the "Python Style
+Guide").
 
 Commenting Sections of Code
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -130,7 +132,9 @@ Docstrings versus Block comments
 
 These aren't interchangeable. For a function or class, the leading
 comment block is a programmer's note. The docstring describes the
-operation of the function or class: ::
+*operation* of the function or class:
+
+.. code-block:: python
 
     # This function slows down program execution for some reason.
     def square_and_rooter(x):
@@ -154,7 +158,8 @@ Pycco_
 .. _Docco: http://jashkenas.github.com/docco
 
 Ronn_
-    Ronn builds unix manuals. It converts human readable textfiles to roff for terminal display, and also to HTML for the web.
+    Ronn builds unix manuals. It converts human readable textfiles to roff
+    for terminal display, and also to HTML for the web.
 
 .. _Ronn: https://github.com/rtomayko/ronn
 
@@ -164,7 +169,7 @@ Epydoc_
 .. _Epydoc: http://epydoc.sourceforge.net
 
 MkDocs_
-    MkDocs is a fast and simple static site generator that's geared towards 
+    MkDocs is a fast and simple static site generator that's geared towards
     building project documentation with Markdown.
 
 .. _MkDocs: http://www.mkdocs.org/

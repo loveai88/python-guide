@@ -3,7 +3,7 @@ Web Applications
 ================
 
 As a powerful scripting language adapted to both fast prototyping
-and bigger projects, Python is widely used in Web applications
+and bigger projects, Python is widely used in web application
 development.
 
 Context
@@ -24,7 +24,7 @@ WSGI is documented in :pep:`3333`.
 Frameworks
 ::::::::::
 
-Broadly speaking, a web framework consist of a set of libraries and a main
+Broadly speaking, a web framework consists of a set of libraries and a main
 handler within which you can build custom code to implement a web application
 (i.e. an interactive web site). Most web frameworks include patterns and
 utilities to accomplish at least the following:
@@ -84,17 +84,18 @@ Werkzeug
 `Werkzeug <http://werkzeug.pocoo.org/>`_ is not actually a real framework, but
 rather a very powerful set of tools for building web applications. It provides
 URL routing utilities, request and response objects and a basic development
-server. It is mostly used where users need bigger flexibility for their
-application that is not commonly found in other web frameworks.
+server. It is mostly used where users need more flexibility for their
+application than is commonly found in other web frameworks.
 
 Support can be found on its `mailing list <http://werkzeug.pocoo.org/community/#mailinglist>`_.
 
 
 Tornado
 --------
-`Tornado <http://www.tornadoweb.org/>`_ is a scalable, non-blocking web server and web application framework with
-a relative simple usage. Tornado is known for his high performance.
-It was initially developed for `friendfeed <http://friendfeed.com/>`_ , a real time chat and blog system.
+`Tornado <http://www.tornadoweb.org/>`_ is a scalable, non-blocking web server
+and web application framework with a relative simple usage. Tornado is known
+for its high performance.  It was initially developed for
+`friendfeed <http://friendfeed.com/>`_ , a real time chat and blog system.
 
 In the Jinja2 template engine example it is used to serve the rendered pages.
 
@@ -108,9 +109,9 @@ and functionality and can thus not be considered lightweight. On the other
 hand, it does not provide all the functionality Django does. Instead Pyramid
 brings basic support for most regular tasks and provides a great deal of
 extensibility. Additionally, Pyramid has a huge focus on complete
-`documentation <http://docs.pylonsproject.org/en/latest/docs/pyramid.html>`__. As
-a little extra it comes with the Werkzeug Debugger which allows you to debug a
-running web application in the browser.
+`documentation <http://docs.pylonsproject.org/en/latest/docs/pyramid.html>`__.
+As a little extra it comes with the Werkzeug Debugger which allows you to debug
+a running web application in the browser.
 
 **Support** can also be found in the
 `documentation <http://docs.pylonsproject.org/en/latest/index.html#support-desc>`__.
@@ -156,11 +157,30 @@ setup for Nginx + Gunicorn can be found in the
 
 .. _uwsgi-ref:
 
+uWSGI
+-----
+
+`uWSGI <https://uwsgi-docs.readthedocs.org>`_ is a full stack for building
+hosting services.  In addition to process management, process monitoring,
+and other functionality, uWSGI acts as an application server for various
+programming languages and protocols - including Python and WSGI. uWSGI can
+either be run as a stand-alone web router, or be run behind a full web
+server (such as Nginx or Apache).  In the latter case, a web server can
+configure uWSGI and an application's operation over the
+`uwsgi <https://uwsgi-docs.readthedocs.org/en/latest/Protocol.html>`_
+protocol.  uWSGI's web server support allows for dynamically configuring
+Python, passing environment variables and further tuning.  For full details,
+see `uWSGI magic
+variables <https://uwsgi-docs.readthedocs.org/en/latest/Vars.html>`_.
+
+
+.. _server-best-practices-ref:
+
 
 Server Best Practices
 :::::::::::::::::::::
 
-The majority of self hosted Python applications today are hosted with a WSGI
+The majority of self-hosted Python applications today are hosted with a WSGI
 server such as :ref:`Gunicorn <gunicorn-ref>`, either directly or behind a
 lightweight web server such as :ref:`nginx <nginx-ref>`.
 
@@ -176,7 +196,7 @@ Platform-as-a-Service
 
 Platform-as-a-Service (PaaS) is a type of cloud computing infrastructure
 which abstracts and manages infrastructure, routing, and scaling of web
-applications. When using PaaS, application developers can focus on writing
+applications. When using a PaaS, application developers can focus on writing
 application code rather than needing to be concerned with deployment
 details.
 
@@ -201,10 +221,10 @@ free of charge. Heroku is best described as a horizontal scaling platform. They
 start to charge you once you "scale" your application to run on more than one
 Dyno (abstracted servers) at a time.
 
-Heroku publishes `step-by-step instructions
-<http://devcenter.heroku.com/articles/python>`_ on how to set up your first
-application for use in Heroku, and maintains a list of `example applications
-<http://python.herokuapp.com/>`_.
+Heroku maintains `articles <https://devcenter.heroku.com/categories/python>`_
+on using Python with Heroku as well as `step-by-step instructions
+<https://devcenter.heroku.com/articles/getting-started-with-python>`_ on
+how to set up your first application.
 
 
 DotCloud
@@ -231,9 +251,10 @@ Gondor
 ~~~~~~
 
 `Gondor <https://gondor.io/>`_ is a PaaS specialized for deploying Django
-and Pinax applications. Gondor supports Django versions 1.2 and 1.3 on
-Python version 2.7, and can automatically configure your Django site if you
-use ``local_settings.py`` for site-specific configuration information.
+and Pinax applications. Gondor recommends Django version 1.6 and supports any
+WSGI application on Python version 2.7. Gondor can automatically configure your
+Django site if you use :file:`local_settings.py` for site-specific configuration
+information.
 
 Gondor has a guide on deploying `Django projects <https://gondor.io/support/django/setup/>`_.
 
@@ -241,27 +262,24 @@ Gondor has a guide on deploying `Django projects <https://gondor.io/support/djan
 Templating
 ::::::::::
 
-Most WSGI applications are responding to HTTP requests to serve
-content in HTML or other markup languages. Instead of generating directly
-textual content from Python, the concept of separation of concerns
-advises us to use templates. A template engine manages a suite of
-template files, with a system of hierarchy and inclusion to
-avoid unnecessary repetition, and is in charge of rendering
-(generating) the actual content, filling the static content
-of the templates with the dynamic content generated by the
-application.
+Most WSGI applications are responding to HTTP requests to serve content in HTML
+or other markup languages. Instead of generating directly textual content from
+Python, the concept of separation of concerns advises us to use templates. A
+template engine manages a suite of template files, with a system of hierarchy
+and inclusion to avoid unnecessary repetition, and is in charge of rendering
+(generating) the actual content, filling the static content of the templates
+with the dynamic content generated by the application.
 
 As template files are
-sometimes written by designers or front-end developers,
-it can be difficult to handle increasing complexity.
+sometimes written by designers or front-end developers, it can be difficult to
+handle increasing complexity.
 
-Some general good practices apply to the part of the
-application passing dynamic content to the template engine,
-and to the templates themselves.
+Some general good practices apply to the part of the application passing
+dynamic content to the template engine, and to the templates themselves.
 
 - Template files should be passed only the dynamic
   content that is needed for rendering the template. Avoid
-  to be tempted to pass additional content "just in case":
+  the temptation to pass additional content "just in case":
   it is easier to add some missing variable when needed than to remove
   a likely unused variable later.
 
@@ -269,7 +287,7 @@ and to the templates themselves.
   or assignments in the template itself, and many
   allow some Python code to be evaluated in the
   templates. This convenience can lead to uncontrolled
-  increase in complexity, and often harder to find bugs.
+  increase in complexity, and often make it harder to find bugs.
 
 - It is often necessary to mix JavaScript templates with
   HTML templates. A sane approach to this design is to isolate
@@ -280,9 +298,12 @@ and to the templates themselves.
 
 Jinja2
 ------
-`Jinja2 <http://jinja.pocoo.org/>`_ is a template engine which is similar to the Django template system with some extra features. It is a text-based template
-language and thus can be used to generate any markup. It allows customization of filters, tags, tests and globals.
-Unlike the template system implemented in the Django Framework it allows to call functions. The Code is staying under the BSD license.
+`Jinja2 <http://jinja.pocoo.org/>`_ is a template engine which is similar to
+the Django template system with some extra features. It is a text-based
+template language and thus can be used to generate any markup. It allows
+customization of filters, tags, tests and globals, and unlike the template
+system implemented in the Django Framework, also allows calling functions.
+Jinja2 is released under the BSD license.
 
 Here some important html tags in Jinja2:
 
@@ -305,8 +326,8 @@ Here some important html tags in Jinja2:
 
 
 
-The next listings is an example of a web site in combination with the tornado web server. Tornado is not very complicate
-to use.
+The next listings is an example of a web site in combination with the Tornado
+web server. Tornado is not very complicated to use.
 
 .. code-block:: python
 
@@ -346,7 +367,8 @@ to use.
         application.listen(PORT)
         tornado.ioloop.IOLoop.instance().start()
 
-The `base.html` file can be used as base for all site pages which are for example implemented in the content block.
+The :file:`base.html` file can be used as base for all site pages which are
+for example implemented in the content block.
 
 .. code-block:: html
 
@@ -370,8 +392,9 @@ The `base.html` file can be used as base for all site pages which are for exampl
     </body>
 
 
-The next listing is our site page (`site.html`) loaded in the Python app which extends `base.html`. The content block is
-automatically set into the corresponding block in the base.html page.
+The next listing is our site page (:file:`site.html`) loaded in the Python
+app which extends :file:`base.html`. The content block is automatically set
+into the corresponding block in the :file:`base.html` page.
 
 .. code-block:: html
 
@@ -390,6 +413,65 @@ automatically set into the corresponding block in the base.html page.
         </p>
     {% endblock %}
 
+Chameleon
+---------
+`Chameleon <https://chameleon.readthedocs.org/>`_ Page Templates are an HTML/XML template
+engine implementation of the `Template Attribute Language (TAL) <http://en.wikipedia.org/wiki/Template_Attribute_Language>`_,
+`TAL Expression Syntax (TALES) <http://chameleon.readthedocs.org/en/latest/reference.html#expressions-tales>`_,
+and `Macro Expansion TAL (Metal) <http://chameleon.readthedocs.org/en/latest/reference.html#macros-metal>` syntaxes.
+
+Chameleon is available for Python 2.5 and up (including 3.x and pypy), and
+is commonly used by the `Pyramid Framework <http://trypyramid.com>`_.
+
+Page Templates add within your document structure special element attributes
+and text markup. Using a set of simple language constructs, you control the
+document flow, element repetition, text replacement and translation. Because
+of the attribute-based syntax, unrendered page templates are valid HTML and can
+be viewed in a browser and even edited in WYSIWYG editors. This can make
+round-trip collaboration with designers and prototyping with static files in a
+browser easier.
+
+The basic TAL language is simple enough to grasp from an example:
+
+.. code-block:: html
+
+  <html>
+    <body>
+    <h1>Hello, <span tal:replace="context.name">World</span>!</h1>
+      <table>
+        <tr tal:repeat="row 'apple', 'banana', 'pineapple'">
+          <td tal:repeat="col 'juice', 'muffin', 'pie'">
+             <span tal:replace="row.capitalize()" /> <span tal:replace="col" />
+          </td>
+        </tr>
+      </table>
+    </body>
+  </html>
+  
+
+The `<span tal:replace="expression" />` pattern for text insertion is common
+enough that if you do not require strict validity in your unrendered templates,
+you can replace it with a more terse and readable syntax that uses the pattern
+`${expression}`, as follows:
+
+.. code-block:: html
+
+  <html>
+    <body>
+      <h1>Hello, ${world}!</h1>
+      <table>
+        <tr tal:repeat="row 'apple', 'banana', 'pineapple'">
+          <td tal:repeat="col 'juice', 'muffin', 'pie'">
+             ${row.capitalize()} ${col}
+          </td>
+        </tr>
+      </table>
+    </body>
+  </html>
+  
+
+But keep in mind that the full `<span tal:replace="expression">Default Text</span>` 
+syntax also allows for default content in the unrendered template.
 
 .. rubric:: References
 

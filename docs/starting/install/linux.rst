@@ -18,23 +18,23 @@ side-by-side with the system's Python 2.4 installation.
 You do not need to install or configure anything else to use Python. Having
 said that, I would strongly recommend that you install the tools and libraries
 described in the next section before you start building Python applications
-for real-world use. In particular, you should always install Distribute, as
+for real-world use. In particular, you should always install Setuptools, as
 it makes it much easier for you to use other third-party Python libraries.
 
-Distribute & Pip
+Setuptools & Pip
 ----------------
 
-The most crucial third-party Python software of all is Distribute, which
+The most crucial third-party Python software of all is Setuptools, which
 extends the packaging and installation facilities provided by the distutils
-in the standard library. Once you add Distribute to your Python system you can
+in the standard library. Once you add Setuptools to your Python system you can
 download and install any compliant Python software product with a single
 command. It also enables you to add this network installation capability to
 your own Python software with very little work.
 
-To obtain the latest version of Distribute for Linux, run the python script
-available here: `python-distribute <http://python-distribute.org/distribute_setup.py>`_
+To obtain the latest version of Setuptools for Linux, refer to the documentation
+available here: `unix-setuptools <https://pypi.python.org/pypi/setuptools#unix-wget>`_
 
-The new``easy_install`` command you have available is considered by many to be
+The new ``easy_install`` command you have available is considered by many to be
 deprecated, so we will install its replacement: **pip**. Pip allows for
 uninstallation of packages, and is actively maintained, unlike easy_install.
 
@@ -45,42 +45,21 @@ To install pip, simply open a command prompt and run
     $ easy_install pip
 
 
-Virtualenv
-----------
+Virtual Environments
+--------------------
 
-After Distribute & Pip, the next development tool that you should install is
-`virtualenv <http://pypi.python.org/pypi/virtualenv/>`_. Use pip
+A Virtual Environment is a tool to keep the dependencies required by different projects 
+in separate places, by creating virtual Python environments for them. It solves the 
+"Project X depends on version 1.x but, Project Y needs 4.x" dilemma, and keeps 
+your global site-packages directory clean and manageable.
 
-.. code-block:: console
+For example, you can work on a project which requires Django 1.3 while also
+maintaining a project which requires Django 1.0.
 
-    $ pip install virtualenv
+To start using and see more information: `Virtual Environments <http://github.com/kennethreitz/python-guide/blob/master/docs/dev/virtualenvs.rst>`_ docs. 
 
-The virtualenv kit provides the ability to create virtual Python environments
-that do not interfere with either each other, or the main Python installation.
-If you install virtualenv before you begin coding then you can get into the
-habit of using it to create completely clean Python environments for each
-project. This is particularly important for Web development, where each
-framework and application will have many dependencies.
-
-To set up a new Python environment, change the working directory to where ever
-you want to store the environment, and run the virtualenv utility in your
-project's directory
-
-.. code-block:: console
-
-    $ virtualenv --distribute venv
-
-To use an environment, run ``source venv/bin/activate``. Your command prompt
-will change to show the active environment. Once you have finished working in
-the current virtual environment, run ``deactivate`` to restore your settings
-to normal.
-
-Each new environment automatically includes a copy of ``pip``, so that you can
-setup the third-party libraries and tools that you want to use in that
-environment. Put your own code within a subdirectory of the environment,
-however you wish. When you no longer need a particular environment, simply
-copy your code out of it, and then delete the main directory for the environment.
-
+You can also use :ref:`virtualenvwrapper <virtualenvwrapper-ref>` to make it easier to
+manage your virtual environments.
 
 --------------------------------
 

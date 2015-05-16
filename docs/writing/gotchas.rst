@@ -6,9 +6,10 @@ avoids surprises. However, there are a few cases that can be confusing to
 newcomers.
 
 Some of these cases are intentional but can be potentially surprising. Some
-could arguably be considered language warts. In general though, what follows is a collection
-of potentially tricky behavior that might seem strange at first glance, but is
-generally sensible once you're aware of the underlying cause for the surprise.
+could arguably be considered language warts. In general though, what follows
+is a collection of potentially tricky behavior that might seem strange at first
+glance, but is generally sensible once you're aware of the underlying cause for
+the surprise.
 
 
 .. _default_args:
@@ -79,7 +80,7 @@ signal that no argument was provided (:py:data:`None` is often a good choice).
 When the Gotcha Isn't a Gotcha
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes you specifically can "exploit" (read: use as intended) this behavior
+Sometimes you can specifically "exploit" (read: use as intended) this behavior
 to maintain state between calls of a function. This is often done when writing
 a caching function.
 
@@ -126,7 +127,7 @@ What Does Happen
     8
     8
 
-Five functions are created, but all of them just multiply ``x`` by 4.
+Five functions are created; instead all of them just multiply ``x`` by 4.
 
 Python's closures are *late binding*.
 This means that the values of variables used in closures are looked
@@ -139,7 +140,8 @@ completed and ``i`` is left with its final value of 4.
 What's particularly nasty about this gotcha is the seemingly prevalent
 misinformation that this has something to do with :ref:`lambdas <python:lambda>`
 in Python. Functions created with a ``lambda`` expression are in no way special,
-and in fact the same exact behavior is exhibited by just using an ordinary ``def``:
+and in fact the same exact behavior is exhibited by just using an ordinary
+``def``:
 
 .. code-block:: python
 
@@ -172,13 +174,13 @@ Alternatively, you can use the functools.partial function:
 
     from functools import partial
     from operator import mul
-    
+
     def create_multipliers():
         return [partial(mul, i) for i in range(5)]
 
 When the Gotcha Isn't a Gotcha
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Sometimes you want your closures to behave this way. Late binding is good in lots of
-situations. Looping to create unique functions is unfortunately a case where
-they can cause hiccups.
+Sometimes you want your closures to behave this way. Late binding is good in
+lots of situations. Looping to create unique functions is unfortunately a case
+where they can cause hiccups.

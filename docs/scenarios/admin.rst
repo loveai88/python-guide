@@ -21,7 +21,7 @@ latter will ssh into each server, cd to our project directory, activate the
 virtual environment, pull the newest codebase, and restart the application
 server.
 
-::
+.. code-block:: python
 
     from fabric.api import cd, env, prefix, run, task
 
@@ -38,8 +38,8 @@ server.
                 run('git pull')
                 run('touch app.wsgi')
 
-With the previous code saved in a file named fabfile.py, we can check memory
-usage with:
+With the previous code saved in a file named :file:`fabfile.py`, we can check
+memory usage with:
 
 .. code-block:: console
 
@@ -72,10 +72,10 @@ programs, and host grouping.
 Salt
 ----
 
-`Salt <http://saltstack.org/>`_ is an open source infrastructure management tool.
-It supports remote command execution from a central point (master host) to multiple
-hosts (minions). It also supports system states which can be used to configure
-multiple servers using simple template files.
+`Salt <http://saltstack.org/>`_ is an open source infrastructure management
+tool.  It supports remote command execution from a central point (master host)
+to multiple hosts (minions). It also supports system states which can be used
+to configure multiple servers using simple template files.
 
 Salt supports Python versions 2.6 and 2.7 and can be installed via pip:
 
@@ -83,8 +83,9 @@ Salt supports Python versions 2.6 and 2.7 and can be installed via pip:
 
     $ pip install salt
 
-After configuring a master server and any number of minion hosts, we can run arbitrary
-shell commands or use pre-built modules of complex commands on our minions.
+After configuring a master server and any number of minion hosts, we can run
+arbitrary shell commands or use pre-built modules of complex commands on our
+minions.
 
 The following command lists all available minion hosts, using the ping module.
 
@@ -92,21 +93,24 @@ The following command lists all available minion hosts, using the ping module.
 
     $ salt '*' test.ping
 
-The host filtering is accomplished by matching the minion id, or using the grains system.
-The `grains <http://docs.saltstack.org/en/latest/topics/targeting/grains.html>`_ system
-uses static host information like the operating system version or the CPU architecture to
-provide a host taxonomy for the Salt modules.
+The host filtering is accomplished by matching the minion id,
+or using the grains system. The
+`grains <http://docs.saltstack.org/en/latest/topics/targeting/grains.html>`_
+system uses static host information like the operating system version or the
+CPU architecture to provide a host taxonomy for the Salt modules.
 
-The following command lists all available minions running CentOS using the grains system:
+The following command lists all available minions running CentOS using the
+grains system:
 
 .. code-block:: console
 
     $ salt -G 'os:CentOS' test.ping
 
-Salt also provides a state system. States can be used to configure the minion hosts.
+Salt also provides a state system. States can be used to configure the minion
+hosts.
 
-For example, when a minion host is ordered to read the following state file, it will install
-and start the Apache server:
+For example, when a minion host is ordered to read the following state file,
+it will install and start the Apache server:
 
 .. code-block:: yaml
 
@@ -126,9 +130,12 @@ State files can be written using YAML, the Jinja2 template system or pure Python
 
 Psutil
 ------
-`Psutil <https://code.google.com/p/psutil/>`_ is an interface to different system information (e.g. CPU, memory, disks, network, users and processes).
 
-Here is an example to be aware of some server overload. In case of some failed test (net, CPU) it send an email.
+`Psutil <https://code.google.com/p/psutil/>`_ is an interface to different
+system information (e.g. CPU, memory, disks, network, users and processes).
+
+Here is an example to be aware of some server overload. If any of the
+tests (net, CPU) fail, it will send an email.
 
 .. code-block:: python
 
@@ -162,7 +169,7 @@ Here is an example to be aware of some server overload. In case of some failed t
         if counter > 25:
             attack = 0
             counter = 0
-    # Write a very important email if attack is higher then 4
+    # Write a very important email if attack is higher than 4
     TO = "you@your_email.com"
     FROM = "webmaster@your_domain.com"
     SUBJECT = "Your domain is out of system resources!"
@@ -173,16 +180,57 @@ Here is an example to be aware of some server overload. In case of some failed t
     server.quit()
 
 
-A full terminal application like a widely extended top which is based on psutil and with the ability of a client-server
-monitoring is `glance <https://github.com/nicolargo/glances/>`_.
+A full terminal application like a widely extended top which is based on
+psutil and with the ability of a client-server monitoring is
+`glance <https://github.com/nicolargo/glances/>`_.
 
 Ansible
 -------
 
-.. todo:: Write about Ansible
+`Ansible <http://ansible.com/>`_  is an open source system automation tool.
+The biggest advantage over Puppet or Chef is it does not require an agent on
+the client machine. Playbooks are Ansible’s configuration, deployment, and
+orchestration language and are written in in YAML with Jinja2 for templating.
 
-    `Ansible Documentation
-    <http://www.ansibleworks.com/docs/>`_
+Ansible supports Python versions 2.6 and 2.7 and can be installed via pip:
+
+.. code-block:: console
+
+    $ pip install ansible
+
+Ansible requires an inventory file that describes the hosts to which it has
+access. Below is an example of a host and playbook that will ping all the
+hosts in the inventory file.
+
+Here is an example inventory file:
+:file:`hosts.yml`
+
+.. code-block:: yaml
+
+    [server_name]
+    127.0.0.1
+
+Here is an example playbook:
+:file:`ping.yml`
+
+.. code-block:: yaml
+
+    ---
+    - hosts: all
+
+      tasks:
+        - name: ping
+          action: ping
+
+To run the playbook:
+
+.. code-block:: console
+
+    $ ansible-playbook ping.yml -i hosts.yml --ask-pass
+
+The Ansible playbook will ping all of the servers in the :file:`hosts.yml` file.
+You can also select groups of servers using Ansible. For more information
+about Ansible, read the `Ansible Docs <http://docs.ansible.com/>`_.
 
 
 Chef
@@ -196,9 +244,98 @@ Chef
 Puppet
 ------
 
-.. todo:: Write about Puppet
+`Puppet <http://puppetlabs.com>`_ is IT Automation and configuration management
+software from Puppet Labs that allows System Administrators to define the state
+of their IT Infrastructure, thereby providing an elegant way to manage their
+fleet of physical and virtual machines.
 
-    `Puppet Labs Documentation <http://docs.puppetlabs.com>`_
+Puppet is available both as an Open Source and an Enterprise variant. Modules
+are small, shareable units of code written to automate or define the state of a
+system.  `Puppet Forge <https://forge.puppetlabs.com/>`_ is a repository for
+modules written by the community for Open Source and Enterprise Puppet.
+
+Puppet Agents are installed on nodes whose state needs to be monitored or
+changed.  A desginated server known as the Puppet Master is responsible for
+orchastrating the agent nodes.
+
+Agent nodes send basic facts about the system such as to the operating system,
+kernel, architecture, ip address, hostname etc. to the Puppet Master.
+The Puppet Master then compiles a catalog with information provided by the
+agents on how each node should be configured and sends it to the agent. The
+agent enforces the change as prescribed in the catalog and sends a report back
+to the Puppet Master.
+
+Facter is an interesting tool that ships with Puppet that pulls basic facts
+about the system. These facts can be referenced as a variable while writing
+your Puppet modules.
+
+.. code-block:: console
+
+    $ facter kernel
+    Linux
+.. code-block:: console
+
+    $ facter operatingsystem
+    Ubuntu  
+
+Writing Modules in Puppet is pretty straight forward. Puppet Manifests together
+form Puppet Modules. Puppet manifest end with an extension of ``.pp``.
+Here is an example of 'Hello World' in Puppet.
+
+.. code-block:: puppet
+
+    notify { 'This message is getting logged into the agent node':
+
+        #As nothing is specified in the body the resource title
+        #the notification message by default.
+    }
+
+Here is another example with system based logic. Note how the operatingsystem
+fact is being used as a variable prepended with the ``$`` sign. Similarly, this
+holds true for other facts such as hostname which can be referenced by
+``$hostname``
+
+.. code-block:: puppet
+
+    notify{ 'Mac Warning':
+        message => $operatingsystem ? {
+            'Darwin' => 'This seems to be a Mac.',
+            default  => 'I am a PC.',
+        },
+    }
+
+There are several resource types for Puppet but the package-file-service
+paradigm is all you need for undertaking majority of the configuration
+management. The following Puppet code makes sure that the OpenSSH-Server
+package is installed in a system and the sshd service is notified to restart
+everytime the sshd configuration file is changed.
+
+.. code-block:: puppet
+
+    package { 'openssh-server':
+        ensure => installed,
+    }
+
+    file { '/etc/ssh/sshd_config':
+        source   => 'puppet:///modules/sshd/sshd_config',
+        owner    => 'root',
+        group    => 'root',
+        mode     => '640',
+        notify   =>  Service['sshd'], # sshd will restart
+                                      # whenever you edit this
+                                      # file
+        require  => Package['openssh-server'],
+
+    }
+
+    service { 'sshd':
+        ensure    => running,
+        enable    => true,
+        hasstatus => true,
+        hasrestart=> true,
+    }
+
+For more information, refer to the `Puppet Labs Documentation <http://docs.puppetlabs.com>`_
 
 Blueprint
 ---------
